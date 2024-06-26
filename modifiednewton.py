@@ -1,4 +1,4 @@
-import numpy as np  
+import numpy as np 
 from math import e
 
 f = lambda x : 27*x**3+54*x**2+36*x+8
@@ -15,12 +15,12 @@ def modifiednewton(f, df, x_0, tol):
         return modifiednewton(f, df, x_0-m*(f(x_0)/df(x_0)), tol)
 
 estimate = modifiednewton(f, f_prime, x_0, tol)
-print("estimate =", round(estimate, p))
+print("estimate =", np.round(estimate, p))
 
 coef = [27, 54, 36, 8]
 r = np.roots(coef)
-print(r)
-f_error = abs(r - estimate)
+print("root: ", np.round(r[0], p))
+f_error = abs(np.round((r[0] - estimate), p))
 print("forward error: ", f_error)
-b_error = abs(f(estimate))
+b_error = abs(np.round(f(estimate), p))
 print("backward error: ", b_error)
