@@ -1,9 +1,9 @@
 import numpy as np 
 from scipy.optimize import root
-from math import e
+from math import e, log
 
-f = lambda x : 2*e**(x-1)-x**2-1
-f_prime = lambda x: 2*e**(x-1)-2*x
+f = lambda x : log(3-x)+x-2
+f_prime = lambda x: -1*(3-x)**(-1)+1
 x_0 = float(input("input initial guess(float): "))
 p = int(input("accurate to how many decimal places(int): "))
 tol = 0.5 * 10**(-p)
@@ -25,4 +25,13 @@ f_error = abs(np.round((r.x - estimate), p))
 print("forward error: ", f_error)
 b_error = abs(np.round(f(estimate), p))
 print("backward error: ", b_error)
+
+
+print("f(r) = ", f(r.x))
+print("f'(r) = ", f_prime(r.x))
+
+f_prime_2 = lambda x: -1*(3-x)**(-2)
+print("f''(r) =  ", f_prime_2(r.x))
+f_prime_3 = lambda x: -2*(3-x)**(-3)
+print("f'''(r) = ", f_prime_3(r.x))
 
