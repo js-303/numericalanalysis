@@ -1,11 +1,19 @@
 import numpy as np
 import numpy.linalg as la
 from numpy import array, inf, zeros_like, empty
+from fractions import Fraction as div
 
-A = array([[2,1,-4],
-           [1,-1,1],
-           [-1,3,-2]], dtype=float)
-b = array([-7,-2,6], dtype=float)
+A = array([[div(1/1),div(1/2),div(1/3),div(1/4),div(1/5),div(1/6),div(1/7),div(1/8),div(1/9),div(1/10)],
+           [div(1/2), div(1/3),div(1/4),div(1/5),div(1/6),div(1/7),div(1/8),div(1/9),div(1/10),div(1/11)],
+           [div(1/3), div(1/4),div(1/5),div(1/6),div(1/7),div(1/8),div(1/9),div(1/10),div(1/11),div(1/12)],
+           [div(1/4), div(1/5),div(1/6),div(1/7),div(1/8),div(1/9),div(1/10),div(1/11),div(1/12),div(1/13)],
+           [div(1/5), div(1/6),div(1/7),div(1/8),div(1/9),div(1/10),div(1/11),div(1/12),div(1/13),div(1/14)],
+           [div(1/6), div(1/7),div(1/8),div(1/9),div(1/10),div(1/11),div(1/12),div(1/13),div(1/14),div(1/15)],
+           [div(1/7),div(1/8),div(1/9),div(1/10),div(1/11),div(1/12),div(1/13),div(1/14),div(1/15),div(1/16)],
+           [div(1/8),div(1/9),div(1/10),div(1/11),div(1/12),div(1/13),div(1/14),div(1/15),div(1/16),div(1/17)],
+           [div(1/9),div(1/10),div(1/11),div(1/12),div(1/13),div(1/14),div(1/15),div(1/16),div(1/17),div(1/18)],
+           [div(1/10),div(1/11),div(1/12),div(1/13),div(1/14),div(1/15),div(1/16),div(1/17),div(1/18),div(1/19)],], dtype=float)
+b = array([1,1,1,1,1,1,1,1,1,1], dtype=float)
 
 def rowreduce(A, b):
     U = A.copy()
@@ -22,7 +30,7 @@ def rowreduce(A, b):
             c[i] -= L[i,k]*c[k]
     return (U,c)
 
-(U, c) =rowreduce(A,b)
+(U, c) = rowreduce(A,b)
 
 
 def backsub(U, c):
@@ -44,8 +52,7 @@ def backsubdemo(U,c,demomode=False):
     return x
 """
 
-(U, c) =rowreduce(A,b)
-print(U)
+print(U, c)
 x = backsub(U,c)
 print(f"x = {x}")
 r = b - A@x
