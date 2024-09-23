@@ -25,8 +25,10 @@ for i in range(len(result)):
     mean_list.append(np.mean(result[i]))
 print(mean_list)
 
-"""
-plt.figure(figsize=(10, 10))
-plt.loglog(mean_mean, test_n[i])
+x = mean_list
+y = test_n
+fig, ax = plt.subplots()
+ax.set_xlabel('mean error')
+ax.set_ylabel('n-size')
+plt.loglog(x,y)
 plt.show()
-"""
