@@ -4,14 +4,11 @@ from scipy.optimize import fsolve
 import math
 
 def interpN(x, y, xx):
-  # calculate divided differences
   n = len(x)
   DD = y
   for m in range(1, n):
     for k in range(n-1,m-1,-1):
       DD[k] = (DD[k] - DD[k-1]) / (x[k] - x[k - m])
-
-  # calculate polynomial
   yy = np.zeros(len(xx))
   for k in range(n-1,-1,-1):
     yy = DD[k] + (xx-x[k])*yy
@@ -25,7 +22,7 @@ xx = np.linspace(min(x_values),max(x_values), 1000)
 yy = interpN(x_values,y_values,xx)
 
 p1 = np.polyfit(xx,yy, len(x_values)-1)
-y = 275
+y = 300
 
 find = lambda x: np.polyval(p1,x) - y
 year = fsolve(find, 2000)
