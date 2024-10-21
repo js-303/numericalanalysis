@@ -1,7 +1,7 @@
 import numpy as np
 from numpy import log as ln
 import matplotlib.pyplot as plt
-from scipy.optimize import fsolve
+from scipy.optimize import minimize_scalar
 import math
 
 """
@@ -60,7 +60,7 @@ y_grid = f(x_grid)
 # find interpolating polynomial
 p1 = np.polyfit(x_grid,y_grid,len(x_grid)-1)
 # plot the grid points and interpolating polynomial
-xx = np.linspace(0,1,1000)
+xx = np.linspace(0,1,100)
 yy = np.polyval(p1,xx)
 print(np.polyfit(xx,yy,len(x_grid)-1))
 plt.plot(xx,yy)
@@ -72,7 +72,7 @@ plt.show()
 #x_grid2 = np.arange(-1,1.1,0.05)
 # calculate y values in grid points
 #y_grid2 = f(x_grid2)
-"""
+
 x_values=[1,2,4]
 y_values=[0, ln(2), ln(4)]
 
@@ -80,3 +80,28 @@ p1= np.polyfit(x_values, y_values, 2)
 print(p1)
 print(np.polyval(p1,3))
 print(ln(3)-np.polyval(p1,3))
+"""
+f = lambda x: (x)/(1+20*x**4)
+
+step = 0.2
+x_grid = np.arange(-1,1.01,step)
+y_grid = f(x_grid)
+p1 = np.polyfit(x_grid,y_grid,len(x_grid)-1)
+xx = np.linspace(-1,1,1000)
+yy = np.polyval(p1,xx)
+error = abs((f(xx)-yy))
+target_x = []
+target_y = []
+for i in range(500, len(xx)):
+  if error[i] == max(error):
+    target_x.append(xx[i])
+    target_y.append(f(xx[i]))
+print(target_x, target_y)
+
+print("Largest error:", max(error))
+plt.plot(xx,yy)
+plt.plot(xx, f(xx))
+plt.plot(target_x, target_y, 'o')
+plt.show()
+plt.plot(xx,f(xx)-yy)
+plt.show()
